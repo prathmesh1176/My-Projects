@@ -3,6 +3,7 @@ import { BeatLoader } from 'react-spinners';
 import Navbar from './Components/Navbar';
 import ProductList from './Components/ProductList';
 import Footer from './Components/Footer';
+import Cart from './Cart';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,14 @@ const Products = () => {
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [debouncedSearch, setDebouncedSearch] = useState('');
+
+  
+  const [isCartopen,setIsCartopen]=useState(false);
+  
+  const toggleCart=()=>{
+    setIsCartopen(!isCartopen);
+  }
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -105,6 +114,7 @@ console.log("Filtered products:", filterProducts);
       category={category}
       selectedCategory={selectedCategory}
       setSelectedCategory={setSelectedCategory}
+      toggleCart={toggleCart} 
     />
 
     <div className="p-6  border-4 border-black min-h-screen pt-20">
@@ -116,6 +126,8 @@ console.log("Filtered products:", filterProducts);
     </div>
 
     <Footer />
+    <Cart isOpen={isCartopen} toggleCart={toggleCart} />
+
   </>
 );
 

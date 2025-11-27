@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { CiLogin } from "react-icons/ci";
 import { GiShoppingCart } from "react-icons/gi";
 import { CartContext } from "../Contexts/cartContext";
 
-const Navbar = ({ search, handleSearch, category, selectedCategory, setSelectedCategory }) => {
+
+const Navbar = ({ search, handleSearch, category, selectedCategory, setSelectedCategory,toggleCart }) => {
 
   const { cart } = useContext(CartContext);
 
@@ -41,16 +42,16 @@ const Navbar = ({ search, handleSearch, category, selectedCategory, setSelectedC
           )}
         </div>
 
-        <div className="flex items-center gap-4 ">
+        <div className="flex items-center gap-4 relative">
 
-          <Link to="/cart" className="relative text-2xl">
-            <GiShoppingCart className='size-8 text-blue'/>
+          <button onClick={toggleCart} className='cursor-pointer'>
+            <GiShoppingCart className='size-8 '/>
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 rounded-full">
+              <span className="absolute -top-2 -right bg-red-500 text-white text-xs px-2 rounded-full">
                 {cartCount}
               </span>
             )}
-          </Link>
+          </button>
 
           <Link 
             to='/' 
